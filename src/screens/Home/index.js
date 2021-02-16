@@ -7,15 +7,15 @@ const Home = () => {
   const dispatch = useDispatch();
   const { todos } = useSelector((state) => state.todos);
 
+  const addNewTodo = () => {
+    dispatch(addTodo({ id: Math.random(), nome: 'Iago Dias' }));
+  };
+
   return (
     <Container>
       <Scroll>
         <Body>
-          <Button
-            onPress={() =>
-              dispatch(addTodo({ id: Math.random(), nome: 'Iago Dias' }))
-            }
-          >
+          <Button onPress={() => addNewTodo()}>
             <Text>Adicionar Todo</Text>
           </Button>
 

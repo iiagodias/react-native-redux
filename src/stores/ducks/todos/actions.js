@@ -2,7 +2,7 @@ import { types } from './types';
 
 const addTodo = (todo) => ({
   type: types.ADD_TODO,
-  payload: todo
+  payload: todo,
 });
 
 const removeTodo = (id) => ({
@@ -11,4 +11,3 @@ const removeTodo = (id) => ({
 });
 
 export { addTodo, removeTodo };
-
