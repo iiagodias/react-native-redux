@@ -1,7 +1,7 @@
 import { types } from './types';
 
 const INITIAL_STATE = {
-  todos: [],
+  todos: []
 };
 
 const reducer = (state = INITIAL_STATE, action) => {

@@ -7,15 +7,15 @@ import { persistor, store } from './stores';
 import { light } from './themes';
 
 const App = () => {
-    return (
-        <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                <ThemeProvider theme={light}>
-                    <Root />
-                </ThemeProvider>
-            </PersistGate>
-        </Provider>
-    );
-}
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider theme={light}>
+          <Root />
+        </ThemeProvider>
+      </PersistGate>
+    </Provider>
+  );
+};
 
 export default App;
