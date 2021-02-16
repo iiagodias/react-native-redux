@@ -15,15 +15,20 @@ export const Body = styled.View`
 export const Scroll = styled.ScrollView`
 `;
 
-
-export const Button = styled.TouchableOpacity`
-    padding: 20px;
-    width: 60%;
+export const BoxLogin = styled.View`
     background-color: ${({ theme }) => theme.secundary};
-    justify-content: center;
-    align-items: center;
+    padding: 10px;
+    width: 80%;
+    border-radius: 10px;
 `;
 
-export const Text = styled.Text`
-    font-size: 15px;
+export const Input = styled.TextInput`
+    border-radius: 10px;
+    border: 1px solid ${({ theme }) => theme.border};
+    padding: 10px;
+    margin-bottom: 10px;
+`;
+
+export const Button = styled.TouchableOpacity`
+
 `;

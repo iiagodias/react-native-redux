@@ -1,9 +1,9 @@
 import { all } from 'redux-saga/effects';
 
 function* sagas() {
-    yield all([
+  yield all([
 
-    ]);
+  ]);
 }
 
 export default sagas;
