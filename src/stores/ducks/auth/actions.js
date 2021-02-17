@@ -5,9 +5,14 @@ const AuthUserRequest = (data) => ({
   payload: data
 });
 
-const AuthUserSetData = (data) => ({
+const AuthUserSucess = (data) => ({
   type: types.AUTH_USER_SUCCESS,
   payload: data
 });
 
-export { AuthUserRequest, AuthUserSetData };
+const AuthUserFailed = (error) => ({
+  type: types.AUTH_USER_FAILED,
+  payload: error
+});
+
+export { AuthUserRequest, AuthUserSucess, AuthUserFailed };

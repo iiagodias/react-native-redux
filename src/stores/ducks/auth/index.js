@@ -14,7 +14,8 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         logged: false,
-        loading: true
+        loading: true,
+        error: null
       };
     case types.AUTH_USER_SUCCESS:
       return {
@@ -22,13 +23,15 @@ const reducer = (state = INITIAL_STATE, action) => {
         data: action.payload?.user,
         token: action.payload?.token,
         logged: true,
-        loading: false
+        loading: false,
+        error: null
       };
     case types.AUTH_USER_FAILED:
       return {
         ...state,
         logged: false,
-        loading: false
+        loading: false,
+        error: action.payload
       };
     default:
       return state;

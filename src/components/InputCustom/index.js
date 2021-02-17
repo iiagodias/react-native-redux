@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Controller } from 'react-hook-form';
 import { Input, TextError } from './styles';

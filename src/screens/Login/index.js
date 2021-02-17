@@ -24,8 +24,6 @@ const Login = ({ AuthUserRequest, loading }) => {
     resolver: yupResolver(schema)
   });
 
-  console.log(loading);
-
   const onSubmit = (data) => {
     AuthUserRequest(data);
   };
@@ -61,7 +59,9 @@ const Login = ({ AuthUserRequest, loading }) => {
 
 const mapStateToProps = (state) => ({
   loading: state.auth.loading,
-  data: state.auth.data
+  data: state.auth.data,
+  error: state.auth.error,
+  logged: state.auth.logged
 });
 
 const mapDispatchToProps = (dispatch) =>
