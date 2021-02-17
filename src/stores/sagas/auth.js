@@ -4,6 +4,7 @@ import { AuthUserSetData } from '../ducks/auth/actions';
 import types from '../ducks/auth/types';
 
 function* sendAuthRequest(action) {
+  console.log('entrou aqui');
   const response = yield call(
     api.post,
     '/user/login',
@@ -12,7 +13,6 @@ function* sendAuthRequest(action) {
       headers: { 'Content-Type': 'application/json' }
     }
   );
-  console.log(response);
   yield put(AuthUserSetData(response.data));
 }
 
