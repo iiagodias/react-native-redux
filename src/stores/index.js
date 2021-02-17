@@ -11,7 +11,7 @@ const persistedReducer = persistReducer(
   {
     key: 'root',
     storage: AsyncStorage,
-    whitelist: ['todos', 'auth']
+    whitelist: ['todo', 'auth']
   },
   reducers
 );
