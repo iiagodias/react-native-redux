@@ -12,9 +12,14 @@ function* sendAuthRequest(action) {
       headers: { 'Content-Type': 'application/json' }
     }
   );
+  console.log(response);
   yield put(AuthUserSetData(response.data));
 }
 
+function* watchsendAuthRequest() {
+  yield takeLatest(types.AUTH_USER_REQUEST, sendAuthRequest);
+}
+
 export default function* rootSaga() {
-  yield all([takeLatest(types.AUTH_USER_REQUEST, sendAuthRequest)]);
+  yield all([watchsendAuthRequest()]);
 }
