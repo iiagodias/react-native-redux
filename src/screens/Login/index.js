@@ -8,7 +8,7 @@ import InputCustom from '../../components/InputCustom';
 import { Creators as AuthActions } from '../../stores/ducks/auth';
 import { Body, BoxLogin, Button, Container, TextButton } from './styles';
 
-const Login = ({ AuthUserRequest, loading, error }) => {
+const Login = ({ AuthUserRequest, loading }) => {
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -24,7 +24,6 @@ const Login = ({ AuthUserRequest, loading, error }) => {
     resolver: yupResolver(schema)
   });
 
-  console.log(error);
   const onSubmit = (data) => {
     AuthUserRequest(data);
   };
