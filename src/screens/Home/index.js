@@ -1,12 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Creators as TodoActions } from '../../stores/ducks/todo';
 import { Body, Button, Container, Scroll, Text } from './styles';
 
-const Home = ({ removeTodo, addTodo, todos }) => {
+const Home = () => {
+  const dispatch = useDispatch();
+  const { todos } = useSelector((state) => state.todo);
+  const { addTodo, removeTodo } = TodoActions;
+
   const addNewTodo = () => {
-    addTodo({ id: Math.random(), nome: 'Iago Dias' });
+    dispatch(addTodo({ id: Math.random(), nome: 'Iago Dias' }));
   };
 
   return (
@@ -18,7 +21,7 @@ const Home = ({ removeTodo, addTodo, todos }) => {
           </Button>
 
           {todos.map((item) => (
-            <Button key={item.id} onPress={() => removeTodo(item.id)}>
+            <Button key={item.id} onPress={() => dispatch(removeTodo(item.id))}>
               <Text>{item.nome}</Text>
             </Button>
           ))}
@@ -28,11 +31,4 @@ const Home = ({ removeTodo, addTodo, todos }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  todos: state.todo.todos
-});
-
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(TodoActions, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;

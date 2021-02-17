@@ -10,6 +10,7 @@ import { Body, BoxLogin, Button, Container, TextButton } from './styles';
 const Login = ({ navigation }) => {
   const dispatch = useDispatch();
   const { logged, loading } = useSelector((state) => state.auth);
+  const { AuthUserRequest } = AuthActions;
 
   const schema = yup.object().shape({
     email: yup
@@ -27,7 +28,7 @@ const Login = ({ navigation }) => {
   });
 
   const onSubmit = (data) => {
-    dispatch(AuthActions.AuthUserRequest(data));
+    dispatch(AuthUserRequest(data));
   };
 
   useEffect(() => {
