@@ -17,11 +17,11 @@ const INITIAL_STATE = {
 
 const addTodo = (state = INITIAL_STATE, action) => ({
   ...state,
-  todos: [...state.todos, action.payload]
+  todos: [...state.todos, action]
 });
 
 const removeTodo = (state = INITIAL_STATE, action) => {
-  const newTodo = state.todos.filter((item) => item.id !== action.payload);
+  const newTodo = state.todos.filter((item) => item.id !== action);
   return { ...state, todos: newTodo };
 };
 

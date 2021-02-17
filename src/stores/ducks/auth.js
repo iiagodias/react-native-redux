@@ -29,8 +29,8 @@ const authUserRequest = (state = INITIAL_STATE) => ({
 
 const authUserSuccess = (state = INITIAL_STATE, action) => ({
   ...state,
-  data: action.payload?.user,
-  token: action.payload?.token,
+  data: action?.user,
+  token: action?.token,
   logged: true,
   loading: false,
   error: null
@@ -40,7 +40,7 @@ const authUserFailed = (state = INITIAL_STATE, action) => ({
   ...state,
   logged: false,
   loading: false,
-  error: action.payload
+  error: action
 });
 
 /**
