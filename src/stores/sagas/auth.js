@@ -7,12 +7,13 @@ function* sendAuthRequest(action) {
     const response = yield call(
       api.post,
       '/user/login',
-      JSON.stringify(action.payload),
+      JSON.stringify(action.data),
       {
         headers: { 'Content-Type': 'application/json' }
       }
     );
-    yield put(AuthActions.AuthUserSucess(response.data));
+
+    yield put(AuthActions.AuthUserSuccess(response.data));
   } catch (error) {
     yield put(AuthActions.AuthUserFailed(error.message));
   }

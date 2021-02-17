@@ -1,14 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import InputCustom from '../../components/InputCustom';
 import { Creators as AuthActions } from '../../stores/ducks/auth';
 import { Body, BoxLogin, Button, Container, TextButton } from './styles';
 
-const Login = ({ AuthUserRequest, loading }) => {
+const Login = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const { logged, loading } = useSelector((state) => state.auth);
+
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -25,8 +27,14 @@ const Login = ({ AuthUserRequest, loading }) => {
   });
 
   const onSubmit = (data) => {
-    AuthUserRequest(data);
+    dispatch(AuthActions.AuthUserRequest(data));
   };
+
+  useEffect(() => {
+    if (logged) {
+      navigation.navigate('Home');
+    }
+  }, [logged]);
 
   return (
     <Container>
@@ -57,14 +65,4 @@ const Login = ({ AuthUserRequest, loading }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  loading: state.auth.loading,
-  data: state.auth.data,
-  error: state.auth.error,
-  logged: state.auth.logged
-});
-
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(AuthActions, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;
