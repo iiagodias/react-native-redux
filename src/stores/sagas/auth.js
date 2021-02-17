@@ -1,7 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import api from '../../services/api';
-import { AuthUserFailed, AuthUserSucess } from '../ducks/auth/actions';
-import { types } from '../ducks/auth/types';
+import { Creators as AuthActions, Types } from '../ducks/auth';
 
 function* sendAuthRequest(action) {
   try {
@@ -13,12 +12,12 @@ function* sendAuthRequest(action) {
         headers: { 'Content-Type': 'application/json' }
       }
     );
-    yield put(AuthUserSucess(response.data));
+    yield put(AuthActions.AuthUserSucess(response.data));
   } catch (error) {
-    yield put(AuthUserFailed(error.message));
+    yield put(AuthActions.AuthUserFailed(error.message));
   }
 }
 
 export default function* authWatcher() {
-  yield takeLatest(types.AUTH_USER_REQUEST, sendAuthRequest);
+  yield takeLatest(Types.AUTH_USER_REQUEST, sendAuthRequest);
 }

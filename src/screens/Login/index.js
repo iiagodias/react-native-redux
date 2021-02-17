@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as yup from 'yup';
 import InputCustom from '../../components/InputCustom';
-import * as AuthActions from '../../stores/ducks/auth/actions';
+import { Creators as AuthActions } from '../../stores/ducks/auth';
 import { Body, BoxLogin, Button, Container, TextButton } from './styles';
 
 const Login = ({ AuthUserRequest, loading }) => {
