@@ -20,8 +20,9 @@ const INITIAL_STATE = {
 /**
  * Handlers
  */
-const authUserRequest = (state = INITIAL_STATE) => ({
-  ...state,
+const authUserRequest = () => ({
+  data: {},
+  token: null,
   logged: false,
   loading: true,
   error: null
@@ -36,8 +37,9 @@ const authUserSuccess = (state = INITIAL_STATE, action) => ({
   error: null
 });
 
-const authUserFailed = (state = INITIAL_STATE, action) => ({
-  ...state,
+const authUserFailed = (action) => ({
+  data: {},
+  token: null,
   logged: false,
   loading: false,
   error: action.error
