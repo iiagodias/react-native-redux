@@ -1,3 +1,4 @@
+import { Alert } from 'react-native';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import api from '../../services/api';
 import { Creators as AuthActions, Types } from '../ducks/auth';
@@ -15,6 +16,7 @@ function* sendAuthRequest(action) {
 
     yield put(AuthActions.AuthUserSuccess(response.data));
   } catch (error) {
+    Alert.alert('Aviso', 'Usuário ou senha incorreta.');
     yield put(AuthActions.AuthUserFailed(error.message));
   }
 }

@@ -43,3 +43,8 @@ export const TextError = styled.Text`
   font-size: 14px;
   color: ${({ theme }) => theme.red};
 `;
+
+export const Loading = styled.ActivityIndicator.attrs(({ theme }) => ({
+  color: theme.secundary,
+  size: 'small'
+}))``;

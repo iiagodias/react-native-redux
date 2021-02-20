@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const TextError = styled.Text`
   font-size: 14px;
   color: ${({ theme }) => theme.red};
+  margin-top: 5px;
 `;
 
 export const Input = styled.TextInput`

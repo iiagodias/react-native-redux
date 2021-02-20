@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: ${({ theme }) => theme.primary};
 `;
@@ -24,4 +24,15 @@ export const Button = styled.TouchableOpacity`
 
 export const Text = styled.Text`
   font-size: 15px;
+`;
+
+export const BodyProfile = styled.View`
+  padding: 15px;
+  background-color: ${({ theme }) => theme.secundary};
+  width: 100%;
+  border-radius: 10px;
+`;
+
+export const ContainerAvatar = styled.View`
+  align-items: center;
 `;

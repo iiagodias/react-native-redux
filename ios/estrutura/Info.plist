@@ -41,6 +41,10 @@
 	<string></string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+  <key>NSPhotoLibraryUsageDescription</key>
+	<string>O aplicativo requer acesso a suas fotos para envio de imagem do avatar</string>
+  <key>NSCameraUsageDescription</key>
+	<string>O aplicativo requer acesso a suas fotos para envio de imagem do avatar</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

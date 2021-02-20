@@ -6,15 +6,14 @@ import { createActions, createReducer } from 'reduxsauce';
 export const { Types, Creators } = createActions({
   AuthUserRequest: ['data'],
   AuthUserSuccess: ['data'],
-  AuthUserFailed: ['error']
+  AuthUserFailed: []
 });
 
 const INITIAL_STATE = {
   data: {},
   token: null,
   logged: false,
-  loading: false,
-  error: null
+  loading: false
 };
 
 /**
@@ -24,8 +23,7 @@ const authUserRequest = () => ({
   data: {},
   token: null,
   logged: false,
-  loading: true,
-  error: null
+  loading: true
 });
 
 const authUserSuccess = (state = INITIAL_STATE, action) => ({
@@ -33,16 +31,14 @@ const authUserSuccess = (state = INITIAL_STATE, action) => ({
   data: action.data?.user,
   token: action.data?.token,
   logged: true,
-  loading: false,
-  error: null
+  loading: false
 });
 
-const authUserFailed = (action) => ({
+const authUserFailed = () => ({
   data: {},
   token: null,
   logged: false,
-  loading: false,
-  error: action.error
+  loading: false
 });
 
 /**
