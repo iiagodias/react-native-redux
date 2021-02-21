@@ -14,7 +14,7 @@ const persistedReducer = persistReducer(
   {
     key: 'root',
     storage: AsyncStorage,
-    whitelist: ['todo', 'auth'],
+    whitelist: ['auth'],
     blacklist: blacklistPaths.filter((a) => !a.includes('.')),
     transforms: [
       createTransform((inboundState, key) => {

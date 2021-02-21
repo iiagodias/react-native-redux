@@ -2,22 +2,36 @@ import React from 'react';
 import Swipeable from 'react-native-swipeable';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { withTheme } from 'styled-components';
-import { BoxIconRemove, BoxText, Container, Text } from './styles';
+import { BoxCheck, BoxIconRemove, BoxText, Container, Text } from './styles';
 
-const Task = ({ theme }) => {
-  const renderLeftContent = () => <Text>Opa</Text>;
+const Task = ({ theme, completed, description }) => {
+  const renderLeftContent = () => (
+    <BoxCheck>
+      <Icon name="ios-checkmark-sharp" size={35} color="#FFFF" />
+    </BoxCheck>
+  );
 
-  return (
-    <Swipeable leftContent={renderLeftContent}>
-      <Container>
-        <BoxText>
-          <Text>Buscar a pandora no petshop</Text>
-        </BoxText>
+  const renderCard = () => (
+    <Container completed={completed}>
+      <BoxText>
+        <Text>{description}</Text>
+      </BoxText>
 
-        <BoxIconRemove>
-          <Icon name="trash" size={25} color={theme.red} />
-        </BoxIconRemove>
-      </Container>
+      <BoxIconRemove>
+        <Icon name="trash" size={25} color={theme.red} />
+      </BoxIconRemove>
+    </Container>
+  );
+
+  return completed ? (
+    renderCard()
+  ) : (
+    <Swipeable
+      leftContent={renderLeftContent()}
+      leftActionActivationDistance={150}
+      onLeftActionRelease={() => console.log('oi')}
+    >
+      {renderCard()}
     </Swipeable>
   );
 };

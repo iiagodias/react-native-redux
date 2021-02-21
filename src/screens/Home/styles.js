@@ -42,7 +42,11 @@ export const BoxIcon = styled.TouchableOpacity`
   padding: 10px;
 `;
 
-export const Loading = styled.ActivityIndicator.attrs(() => ({
+export const Loading = styled.ActivityIndicator.attrs(({ size }) => ({
   color: '#000',
-  size: 'small'
+  size
 }))``;
+
+export const BoxLoading = styled.View`
+  margin-top: 15px;
+`;

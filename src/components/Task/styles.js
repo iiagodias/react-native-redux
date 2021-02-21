@@ -4,10 +4,11 @@ export const Container = styled.View`
   width: 100%;
   background-color: ${({ theme }) => theme.secundary};
   padding: 10px;
-  margin-top: 10px;
+  opacity: ${({ completed }) => (completed ? 0.8 : 1)};
   border-radius: 5px;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 15px;
 `;
 
 export const BoxText = styled.View`
@@ -28,5 +29,7 @@ export const BoxCheck = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.green};
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+  padding: 10px;
+  margin-top: 15px;
 `;
