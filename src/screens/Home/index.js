@@ -1,46 +1,55 @@
-import React from 'react';
+import { CommonActions } from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { useDispatch, useSelector } from 'react-redux';
 import Avatar from '../../components/Avatar';
-import { Creators as TodoActions } from '../../stores/ducks/todo';
+import { Creators as AuthActions } from '../../stores/ducks/auth';
 import {
   Body,
   BodyProfile,
-  Button,
+  BoxIcon,
   Container,
   ContainerAvatar,
-  Scroll,
-  Text
+  ContainerName,
+  Loading,
+  Name,
+  Scroll
 } from './styles';
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const dispatch = useDispatch();
-  const { todos } = useSelector((state) => state.todo);
-  const { addTodo, removeTodo } = TodoActions;
+  const { data, loadingLogout, logged } = useSelector((state) => state.auth);
+  const { LogoutUserRequest } = AuthActions;
 
-  const addNewTodo = () => {
-    dispatch(addTodo({ id: Math.random(), nome: 'Iago Dias' }));
-  };
+  useEffect(() => {
+    if (!logged) {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'Login' }]
+        })
+      );
+    }
+  }, [logged]);
 
   return (
     <Container>
       <Scroll>
         <Body>
           <BodyProfile>
+            <BoxIcon onPress={() => dispatch(LogoutUserRequest())}>
+              {loadingLogout ? (
+                <Loading />
+              ) : (
+                <Icon name="enter-sharp" size={25} color="#000" />
+              )}
+            </BoxIcon>
             <ContainerAvatar>
               <Avatar />
             </ContainerAvatar>
-            <Button onPress={() => addNewTodo()}>
-              <Text>Adicionar Todo</Text>
-            </Button>
-
-            {todos.map((item) => (
-              <Button
-                key={item.id}
-                onPress={() => dispatch(removeTodo(item.id))}
-              >
-                <Text>{item.nome}</Text>
-              </Button>
-            ))}
+            <ContainerName>
+              <Name>{data.name}</Name>
+            </ContainerName>
           </BodyProfile>
         </Body>
       </Scroll>

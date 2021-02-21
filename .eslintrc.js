@@ -18,6 +18,8 @@ module.exports = {
   },
   plugins: ['react', 'react-hooks', 'prettier'],
   rules: {
+    'no-underscore-dangle': 0,
+    'no-param-reassign': 0,
     'react/prop-types': 0,
     'react/jsx-props-no-spreading': 'off',
     'prettier/prettier': 'error',

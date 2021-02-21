@@ -1,22 +1,28 @@
 import React from 'react';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import OptionsMenu from 'react-native-option-menu';
-import { Container, Image } from './styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { Creators as AuthActions } from '../../stores/ducks/user';
+import { Container, ContainerLoading, Image, Loading } from './styles';
 
 const Avatar = () => {
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.user);
+  const { data } = useSelector((state) => state.auth);
+  const { AvatarUpdateRequest } = AuthActions;
   const optionImagem = {
     mediaType: 'photo'
   };
 
   const OpenGallery = () => {
-    launchImageLibrary(optionImagem, async (response) => {
-      console.log(response);
+    launchImageLibrary(optionImagem, (response) => {
+      dispatch(AvatarUpdateRequest(response));
     });
   };
 
   const OpenCamera = () => {
-    launchCamera(optionImagem, async (response) => {
-      console.log(response);
+    launchCamera(optionImagem, (response) => {
+      dispatch(AvatarUpdateRequest(response));
     });
   };
 
@@ -24,11 +30,18 @@ const Avatar = () => {
     <Container>
       <Image
         source={{
-          uri:
-            'https://api-nodejs-todolist.herokuapp.com/user/6008cc3e5ab46f0017b8f64e/avatar',
+          uri: `https://api-nodejs-todolist.herokuapp.com/user/${
+            data._id
+          }/avatar?v=${Date.now()}`,
           cache: 'reload'
         }}
-      />
+      >
+        {loading && (
+          <ContainerLoading>
+            <Loading />
+          </ContainerLoading>
+        )}
+      </Image>
     </Container>
   );
 
