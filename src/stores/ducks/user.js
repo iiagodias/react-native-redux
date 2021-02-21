@@ -6,26 +6,31 @@ import { createActions, createReducer } from 'reduxsauce';
 export const { Types, Creators } = createActions({
   AvatarUpdateRequest: ['data'],
   AvatarUpdateSuccess: [],
-  AvatarUpdateFailed: []
+  AvatarUpdateFailed: [],
+  AvatarDeleteRequest: []
 });
 
 const INITIAL_STATE = {
-  loading: false
+  loadingAvatar: false
 };
 
 /**
  * Handlers
  */
 const AvatarUpdateRequest = () => ({
-  loading: true
+  loadingAvatar: true
 });
 
 const AvatarUpdateSuccess = () => ({
-  loading: false
+  loadingAvatar: false
 });
 
 const AvatarUpdateFailed = () => ({
-  loading: false
+  loadingAvatar: false
+});
+
+const AvatarDeleteRequest = () => ({
+  loadingAvatar: true
 });
 
 /**
@@ -34,5 +39,6 @@ const AvatarUpdateFailed = () => ({
 export default createReducer(INITIAL_STATE, {
   [Types.AVATAR_UPDATE_REQUEST]: AvatarUpdateRequest,
   [Types.AVATAR_UPDATE_SUCCESS]: AvatarUpdateSuccess,
-  [Types.AVATAR_UPDATE_FAILED]: AvatarUpdateFailed
+  [Types.AVATAR_UPDATE_FAILED]: AvatarUpdateFailed,
+  [Types.AVATAR_DELETE_REQUEST]: AvatarDeleteRequest
 });

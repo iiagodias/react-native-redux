@@ -7,23 +7,31 @@ import { Container, ContainerLoading, Image, Loading } from './styles';
 
 const Avatar = () => {
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.user);
+  const { AvatarUpdateRequest, AvatarDeleteRequest } = AuthActions;
+  const { loadingAvatar } = useSelector((state) => state.user);
   const { data } = useSelector((state) => state.auth);
-  const { AvatarUpdateRequest } = AuthActions;
   const optionImagem = {
     mediaType: 'photo'
   };
 
   const OpenGallery = () => {
     launchImageLibrary(optionImagem, (response) => {
-      dispatch(AvatarUpdateRequest(response));
+      if (!response.didCancel) {
+        dispatch(AvatarUpdateRequest(response));
+      }
     });
   };
 
   const OpenCamera = () => {
     launchCamera(optionImagem, (response) => {
-      dispatch(AvatarUpdateRequest(response));
+      if (!response.didCancel) {
+        dispatch(AvatarUpdateRequest(response));
+      }
     });
+  };
+
+  const deleteAvatar = () => {
+    dispatch(AvatarDeleteRequest());
   };
 
   const RenderAvatar = () => (
@@ -36,7 +44,7 @@ const Avatar = () => {
           cache: 'reload'
         }}
       >
-        {loading && (
+        {loadingAvatar && (
           <ContainerLoading>
             <Loading />
           </ContainerLoading>
@@ -48,9 +56,9 @@ const Avatar = () => {
   return (
     <OptionsMenu
       customButton={RenderAvatar()}
-      destructiveIndex={2}
-      options={['Abrir câmera', 'Abrir galeria', 'Cancelar']}
-      actions={[OpenCamera, OpenGallery]}
+      destructiveIndex={3}
+      options={['Abrir câmera', 'Abrir galeria', 'Apagar foto', 'Cancelar']}
+      actions={[OpenCamera, OpenGallery, deleteAvatar]}
     />
   );
 };

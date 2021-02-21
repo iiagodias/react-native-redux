@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useDispatch, useSelector } from 'react-redux';
 import Avatar from '../../components/Avatar';
+import Task from '../../components/Task';
 import { Creators as AuthActions } from '../../stores/ducks/auth';
 import {
   Body,
@@ -51,6 +52,7 @@ const Home = ({ navigation }) => {
               <Name>{data.name}</Name>
             </ContainerName>
           </BodyProfile>
+          <Task />
         </Body>
       </Scroll>
     </Container>
