@@ -21,6 +21,7 @@ module.exports = {
     'no-underscore-dangle': 0,
     'no-param-reassign': 0,
     'react/prop-types': 0,
+    'react/jsx-wrap-multilines': 'off',
     'react/jsx-props-no-spreading': 'off',
     'prettier/prettier': 'error',
     'react-hooks/rules-of-hooks': 'error',

@@ -4,6 +4,8 @@ export const Container = styled.View`
   width: 100%;
   background-color: ${({ theme }) => theme.secundary};
   padding: 10px;
+  height: 60px;
+  align-items: center;
   opacity: ${({ completed }) => (completed ? 0.8 : 1)};
   border-radius: 5px;
   flex-direction: row;
@@ -33,3 +35,8 @@ export const BoxCheck = styled.View`
   padding: 10px;
   margin-top: 15px;
 `;
+
+export const Loading = styled.ActivityIndicator.attrs(({ theme, color }) => ({
+  color: color || theme.secundary,
+  size: 'small'
+}))``;

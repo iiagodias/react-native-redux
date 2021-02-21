@@ -1,5 +1,6 @@
 import { CommonActions } from '@react-navigation/native';
 import React, { useEffect } from 'react';
+import { RefreshControl } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useDispatch, useSelector } from 'react-redux';
 import Avatar from '../../components/Avatar';
@@ -43,7 +44,15 @@ const Home = ({ navigation }) => {
 
   return (
     <Container>
-      <Scroll>
+      <Scroll
+        refreshControl={
+          <RefreshControl
+            tintColor="#000"
+            refreshing={false}
+            onRefresh={() => dispatch(GetTodoRequest())}
+          />
+        }
+      >
         <Body>
           <BodyProfile>
             <BoxIcon onPress={() => dispatch(LogoutUserRequest())}>
@@ -67,9 +76,10 @@ const Home = ({ navigation }) => {
           ) : (
             todos.map((item) => (
               <Task
+                id={item._id}
                 description={item.description}
                 completed={item.completed}
-                key={item.id}
+                key={item._id}
               />
             ))
           )}
