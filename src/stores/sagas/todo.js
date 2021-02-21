@@ -32,9 +32,32 @@ function* sendDeleteTodoRequest({ id }) {
     yield put(TodoActions.DeleteTodoSuccess());
     yield put(TodoActions.GetTodoRequest());
   } catch (error) {
-    console.log(error);
     Alert.alert('Aviso', 'Ocorreu um erro ao deletar a tarefa.');
     yield put(TodoActions.DeleteTodoFailed());
+  }
+}
+
+function* sendCompletedTodoRequest({ id }) {
+  try {
+    const { token } = yield select((state) => state.auth);
+    yield call(
+      api.put,
+      `/task/${id}`,
+      {
+        completed: true
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+    yield put(TodoActions.CompletedTodoSuccess());
+    yield put(TodoActions.GetTodoRequest());
+  } catch (error) {
+    Alert.alert('Aviso', 'Ocorreu um erro ao atualizar a tarefa.');
+    yield put(TodoActions.CompletedTodoFailed());
   }
 }
 
@@ -46,6 +69,14 @@ function* sendDeleteTodoRequestWatch() {
   yield takeLatest(Types.DELETE_TODO_REQUEST, sendDeleteTodoRequest);
 }
 
+function* sendCompletedTodoRequestWatch() {
+  yield takeLatest(Types.COMPLETED_TODO_REQUEST, sendCompletedTodoRequest);
+}
+
 export default function* authWatcher() {
-  yield all([call(sendGetTodoRequestWatch), call(sendDeleteTodoRequestWatch)]);
+  yield all([
+    call(sendGetTodoRequestWatch),
+    call(sendDeleteTodoRequestWatch),
+    call(sendCompletedTodoRequestWatch)
+  ]);
 }

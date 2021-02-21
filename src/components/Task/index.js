@@ -15,8 +15,10 @@ import {
 
 const Task = ({ theme, completed, description, id }) => {
   const dispatch = useDispatch();
-  const { loadingDelete } = useSelector((state) => state.todo);
-  const { DeleteTodoRequest } = TodoActions;
+  const { loadingDelete, loadingCompleted } = useSelector(
+    (state) => state.todo
+  );
+  const { DeleteTodoRequest, CompletedTodoRequest } = TodoActions;
 
   const renderLeftContent = () => (
     <BoxCheck>
@@ -27,7 +29,9 @@ const Task = ({ theme, completed, description, id }) => {
   const renderCard = () => (
     <Container completed={completed}>
       <BoxText>
-        <Text>{description}</Text>
+        <Text>
+          {loadingCompleted === id ? <Loading color="#000" /> : description}
+        </Text>
       </BoxText>
 
       <BoxIconRemove onPress={() => dispatch(DeleteTodoRequest(id))}>
@@ -46,7 +50,7 @@ const Task = ({ theme, completed, description, id }) => {
     <Swipeable
       leftContent={renderLeftContent()}
       leftActionActivationDistance={150}
-      onLeftActionRelease={() => console.log('oi')}
+      onLeftActionRelease={() => dispatch(CompletedTodoRequest(id))}
     >
       {renderCard()}
     </Swipeable>
