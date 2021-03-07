@@ -50,3 +50,22 @@ export const Loading = styled.ActivityIndicator.attrs(({ size }) => ({
 export const BoxLoading = styled.View`
   margin-top: 15px;
 `;
+
+export const Footer = styled.View`
+  align-items: center;
+  margin-top: 10px;
+`;
+
+export const BoxAdd = styled.TouchableOpacity`
+  background-color: ${({ theme }) => theme.secundary};
+  padding: 20px;
+  width: 90%;
+  align-items: center;
+  border-radius: 10px;
+`;
+
+export const TextAdd = styled.Text`
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+`;

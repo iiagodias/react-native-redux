@@ -12,7 +12,10 @@ export const { Types, Creators } = createActions({
   DeleteTodoFailed: [],
   CompletedTodoRequest: ['id'],
   CompletedTodoSuccess: [],
-  CompletedTodoFailed: []
+  CompletedTodoFailed: [],
+  AddTodoRequest: ['description'],
+  AddTodoSuccess: [],
+  AddTodoFailed: []
 });
 
 /**
@@ -22,7 +25,8 @@ const INITIAL_STATE = {
   todos: [],
   loadingTodos: false,
   loadingDelete: false,
-  loadingCompleted: false
+  loadingCompleted: false,
+  loadingAdd: false
 };
 
 const getTodoRequest = (state = INITIAL_STATE) => ({
@@ -65,6 +69,19 @@ const completedTodoFailed = (state = INITIAL_STATE) => ({
   loadingCompleted: false
 });
 
+const addTodoRequest = (state = INITIAL_STATE) => ({
+  ...state,
+  loadingAdd: true
+});
+const addTodoSucess = (state = INITIAL_STATE) => ({
+  ...state,
+  loadingAdd: false
+});
+const addTodoFailed = (state = INITIAL_STATE) => ({
+  ...state,
+  loadingAdd: false
+});
+
 /**
  * Reducer
  */
@@ -77,5 +94,8 @@ export default createReducer(INITIAL_STATE, {
   [Types.DELETE_TODO_FAILED]: deleteTodoFailed,
   [Types.COMPLETED_TODO_REQUEST]: completedTodoRequest,
   [Types.COMPLETED_TODO_SUCCESS]: completedTodoSucess,
-  [Types.COMPLETED_TODO_FAILED]: completedTodoFailed
+  [Types.COMPLETED_TODO_FAILED]: completedTodoFailed,
+  [Types.ADD_TODO_REQUEST]: addTodoRequest,
+  [Types.ADD_TODO_SUCCESS]: addTodoSucess,
+  [Types.ADD_TODO_FAILED]: addTodoFailed
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Swipeable from 'react-native-swipeable';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -57,4 +57,4 @@ const Task = ({ theme, completed, description, id }) => {
   );
 };
 
-export default withTheme(Task);
+export default memo(withTheme(Task));

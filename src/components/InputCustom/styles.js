@@ -9,6 +9,6 @@ export const TextError = styled.Text`
 export const Input = styled.TextInput`
   border-radius: 10px;
   border: 1px solid ${({ theme, error }) => (error ? theme.red : theme.border)};
-  padding: 10px;
+  padding: 15px;
   margin-top: 10px;
 `;

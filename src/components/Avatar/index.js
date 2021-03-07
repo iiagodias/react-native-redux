@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import OptionsMenu from 'react-native-option-menu';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,21 +14,21 @@ const Avatar = () => {
     mediaType: 'photo'
   };
 
-  const OpenGallery = () => {
+  const OpenGallery = useCallback(() => {
     launchImageLibrary(optionImagem, (response) => {
       if (!response.didCancel) {
         dispatch(AvatarUpdateRequest(response));
       }
     });
-  };
+  }, []);
 
-  const OpenCamera = () => {
+  const OpenCamera = useCallback(() => {
     launchCamera(optionImagem, (response) => {
       if (!response.didCancel) {
         dispatch(AvatarUpdateRequest(response));
       }
     });
-  };
+  }, []);
 
   const deleteAvatar = () => {
     dispatch(AvatarDeleteRequest());

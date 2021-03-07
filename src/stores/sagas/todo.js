@@ -61,6 +61,30 @@ function* sendCompletedTodoRequest({ id }) {
   }
 }
 
+function* sendAddTodoRequest({ description }) {
+  try {
+    const { token } = yield select((state) => state.auth);
+    yield call(
+      api.post,
+      `/task`,
+      {
+        description
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+    yield put(TodoActions.AddTodoSuccess());
+    yield put(TodoActions.GetTodoRequest());
+  } catch (error) {
+    Alert.alert('Aviso', 'Ocorreu um erro ao cadastrar a tarefa.');
+    yield put(TodoActions.AddTodoFailed());
+  }
+}
+
 function* sendGetTodoRequestWatch() {
   yield takeLatest(Types.GET_TODO_REQUEST, sendGetTodoRequest);
 }
@@ -73,10 +97,15 @@ function* sendCompletedTodoRequestWatch() {
   yield takeLatest(Types.COMPLETED_TODO_REQUEST, sendCompletedTodoRequest);
 }
 
+function* sendAddTodoRequestWatch() {
+  yield takeLatest(Types.ADD_TODO_REQUEST, sendAddTodoRequest);
+}
+
 export default function* authWatcher() {
   yield all([
     call(sendGetTodoRequestWatch),
     call(sendDeleteTodoRequestWatch),
-    call(sendCompletedTodoRequestWatch)
+    call(sendCompletedTodoRequestWatch),
+    call(sendAddTodoRequestWatch)
   ]);
 }
